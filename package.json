@@ -3,23 +3,31 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --watch config --exec \"yarn dev:server\"",
+    "dev:server": "webpack-dev-server --config=config/webpack.config.js --env=development"
+  },
   "dependencies": {
-    "@hot-loader/react-dom": "npm:react-dom",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-hot-loader": "^4.6.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "dotenv": "^6.2.0",
-    "node-sass": "^4.11.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "nodemon": "^1.18.10",
+    "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "terser-webpack-plugin": "^1.2.2",
     "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
   }
 }
