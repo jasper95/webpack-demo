@@ -57,12 +57,17 @@ module.exports = (mode) => {
         template: resolvePath('public/index.html'),
       }),
       new webpack.DefinePlugin(getEnv()),
-      mode === 'development' && new webpack.HotModuleReplacementPlugin(),
+      mode === 'development' &&
+        new webpack.HotModuleReplacementPlugin(),
       mode === 'production' &&
         new MiniCssExtractPlugin({
           filename: 'css/[name].[contenthash:8].css',
         }),
     ].filter(Boolean),
+    resolve: {
+      modules: ['node_modules', 'src'],
+      extensions: ['.mjs', '.js', '.json', '.jsx'],
+    },
     devServer: {
       open: true,
       port: PORT,
