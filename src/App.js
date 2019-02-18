@@ -6,7 +6,6 @@ function App(props) {
   const {
     count
   } = state
-  console.log('wow')
   return (
     <div>
       <button onClick={() => handleEvent({ type: 'increment' })}>+</button>
