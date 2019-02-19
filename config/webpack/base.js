@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
@@ -14,7 +13,7 @@ const configs = {
   }
 }
 
-module.exports = (options) => {
+function baseConfig(options){
   const { mode } = options
   const {
     styleLoader
@@ -56,9 +55,6 @@ module.exports = (options) => {
       filename: 'js/[name].js'
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: resolvePath('views/index.html'),
-      }),
       new webpack.DefinePlugin(getEnv()),
     ],
     resolve: {
@@ -110,4 +106,9 @@ function getStyleLoaders(cssOptions, mainLoader, preProcessor) {
     },
     preProcessor
   ].filter(Boolean)
-};
+}
+
+module.exports = {
+  baseConfig,
+  resolvePath
+}

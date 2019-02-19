@@ -2,6 +2,7 @@ import React, { useReducer } from 'react'
 import { hot } from 'react-hot-loader/root'
 
 function App(props) {
+  console.log('process.env', process.env)
   const [state, handleEvent] = useReducer(reducer.bind(null, props), { count: 0 })
   const {
     count
