@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const merge = require('webpack-merge')
 const webpack = require('webpack')
 require('dotenv').config({ path: resolvePath('config/.env') })
 
@@ -12,14 +13,16 @@ const configs = {
     styleLoader: MiniCssExtractPlugin.loader
   }
 }
-const { PORT } = process.env
-module.exports = (mode) => {
-  const { styleLoader } = configs[mode]
-  return {
+
+module.exports = (options) => {
+  const { mode } = options
+  const {
+    styleLoader
+  } = configs[mode]
+  return merge(options, {
     entry: [
       './src/main.js'
     ],
-    mode,
     module: {
       rules: [
         {
@@ -54,26 +57,15 @@ module.exports = (mode) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: resolvePath('public/index.html'),
+        template: resolvePath('views/index.html'),
       }),
       new webpack.DefinePlugin(getEnv()),
-      mode === 'development' &&
-        new webpack.HotModuleReplacementPlugin(),
-      mode === 'production' &&
-        new MiniCssExtractPlugin({
-          filename: 'css/[name].[contenthash:8].css',
-        }),
-    ].filter(Boolean),
+    ],
     resolve: {
       modules: ['node_modules', 'src'],
       extensions: ['.mjs', '.js', '.json', '.jsx'],
     },
-    devServer: {
-      open: true,
-      port: PORT,
-      hotOnly: true
-    }
-  }
+  })
 }
 
 function getEnv(){
