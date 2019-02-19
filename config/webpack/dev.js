@@ -14,6 +14,9 @@ module.exports = baseConfig({
     open: true,
     port: process.env.PORT,
     hotOnly: true,
-    overlay: true
+    overlay: true,
+    historyApiFallback: {
+      disableDotRule: true
+    }
   }
 })
